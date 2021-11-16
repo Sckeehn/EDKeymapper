@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="static/stylesheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EDKeyMapper</title>
+  </head>
+  <body>
+    <div class = "grid_container">
+      <div class = "navbar">
+        <h1 class= "title">EDKeyMapper</h1>
+      </div>
+      <div class = "left_bar">
+          <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="keymapFile"/>
+            <input type="submit" value="upload" />
+          </form>
+          {{ controls|safe }}
+      </div>
+      <div class = "keyboard_container">
+        <div class = "kbMini">
+            <div id="esc" class="kbswitch">esc</div>
+            <div id="f1" class="kbswitch">f1</div>
+            <div id="f2" class="kbswitch">f2</div>
+            <div id="f3" class="kbswitch">f3</div>
+            <div id="f4" class="kbswitch">f4</div>
+            <div id="f5" class="kbswitch">f5</div>
+            <div id="f6" class="kbswitch">f6</div>
+            <div id="f7" class="kbswitch">f7</div>
+            <div id="f8" class="kbswitch">f8</div>
+            <div id="f9" class="kbswitch">f9</div>
+            <div id="f10" class="kbswitch">f10</div>
+            <div id="f11" class="kbswitch">f11</div>
+            <div id="f12" class="kbswitch">f12</div>
+            <div id="prtsc" class="kbswitch">PRTSC</div>
+            <div id="scrolllock" class="kbswitch">Scroll Lock</div>
+            <div id="pause" class="kbswitch">Pause</div>
+            <!-- ROW 2 -->
+            <div id="tilde" class="kbswitch">`</div>
+            <div id="one" class="kbswitch">1</div>
+            <div id="two" class="kbswitch">2</div>
+            <div id="three" class="kbswitch">3</div>
+            <div id="four" class="kbswitch">4</div>
+            <div id="five" class="kbswitch">5</div>
+            <div id="six" class="kbswitch">6</div>
+            <div id="seven" class="kbswitch">7</div>
+            <div id="eight" class="kbswitch">8</div>
+            <div id="nine" class="kbswitch">9</div>
+            <div id="zero" class="kbswitch">0</div>
+            <div id="hyphen" class="kbswitch">-</div>
+            <div id="equal" class="kbswitch">=</div>
+            <div id="backspace" class="kbswitch">backspace</div>
+            <div id="insert" class="kbswitch">insert</div>
+            <div id="home" class="kbswitch">home</div>
+            <div id="pageup" class="kbswitch">page up</div>
+            <div id="numlock" class="kbswitch">num lock</div>
+            <div id="numpadslash" class="kbswitch">/</div>
+            <div id="numpadmult" class="kbswitch">*</div>
+            <div id="numpadhyphen" class="kbswitch">-</div>
+            <!-- ROW 3 -->
+            <div id="tab" class="kbswitch">tab</div>
+            <div id="q" class="kbswitch">q</div>
+            <div id="w" class="kbswitch">w</div>
+            <div id="e" class="kbswitch">e</div>
+            <div id="r" class="kbswitch">r</div>
+            <div id="t" class="kbswitch">t</div>
+            <div id="y" class="kbswitch">y</div>
+            <div id="u" class="kbswitch">u</div>
+            <div id="i" class="kbswitch">i</div>
+            <div id="o" class="kbswitch">o</div>
+            <div id="p" class="kbswitch">p</div>
+            <div id="leftBracket" class="kbswitch">[</div>
+            <div id="rightBracket" class="kbswitch">]</div>
+            <div id="backslash" class="kbswitch">\</div>
+            <div id="del" class="kbswitch">del</div>
+            <div id="end" class="kbswitch">end</div>
+            <div id="pagedown" class="kbswitch">page down</div>
+            <div id="numpad7" class="kbswitch">7</div>
+            <div id="numpad8" class="kbswitch">8</div>
+            <div id="numpad9" class="kbswitch">9</div>
+            <div id="plus" class="kbswitch">+</div>
+            <!-- ROW 4 -->
+            <div id="caps" class="kbswitch">caps lock</div>
+            <div id="a" class="kbswitch">a</div>
+            <div id="s" class="kbswitch">s</div>
+            <div id="d" class="kbswitch">d</div>
+            <div id="f" class="kbswitch">f</div>
+            <div id="g" class="kbswitch">g</div>
+            <div id="h" class="kbswitch">h</div>
+            <div id="j" class="kbswitch">j</div>
+            <div id="k" class="kbswitch">k</div>
+            <div id="l" class="kbswitch">l</div>
+            <div id="colon" class="kbswitch">;</div>
+            <div id="apostrophe" class="kbswitch">''</div>
+            <div id="enter" class="kbswitch">return</div>
+            <div id="numpad4" class="kbswitch">4</div>
+            <div id="numpad5" class="kbswitch">5</div>
+            <div id="numpad6" class="kbswitch">6</div>
+            <!-- ROW 5 -->
+            <div id="leftShift" class="kbswitch">shift</div>
+            <div id="z" class="kbswitch">z</div>
+            <div id="x" class="kbswitch">x</div>
+            <div id="c" class="kbswitch">c</div>
+            <div id="v" class="kbswitch">v</div>
+            <div id="b" class="kbswitch">b</div>
+            <div id="n" class="kbswitch">n</div>
+            <div id="m" class="kbswitch">m</div>
+            <div id="comma" class="kbswitch">,</div>
+            <div id="period" class="kbswitch">.</div>
+            <div id="slash" class="kbswitch">/</div>
+            <div id="rightShift" class="kbswitch">shift</div>
+            <div id="upArrow" class="kbswitch">UP</div>
+            <div id="numpad1" class="kbswitch">1</div>
+            <div id="numpad2" class="kbswitch">2</div>
+            <div id="numpad3" class="kbswitch">3</div>
+            <div id="numpadEnter" class="kbswitch">enter</div>
+            <!-- ROW 6 -->
+            <div id="leftCtrl" class="kbswitch">ctrl</div>
+            <div id="leftWin" class="kbswitch">win</div>
+            <div id="leftAlt" class="kbswitch">alt</div>
+            <div id="space" class="kbswitch">space</div>
+            <div id="rightAlt" class="kbswitch">alt</div>
+            <div id="rightWin" class="kbswitch">win</div>
+            <div id="fn" class="kbswitch">fn</div>
+            <div id="rightCtrl" class="kbswitch">ctrl</div>
+            <div id="leftArrow" class="kbswitch">LEFT</div>
+            <div id="downArrow" class="kbswitch">DOWN</div>
+            <div id="rightArrow" class="kbswitch">RIGHT</div>
+            <div id="numpad0" class="kbswitch">0</div>
+            <div id="numpadperiod" class="kbswitch">.</div>
+        </div>
+      </div>
+  </body>
+</html>

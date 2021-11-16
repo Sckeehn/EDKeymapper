@@ -1,0 +1,396 @@
+@font-face {
+		font-family: eurostyle;
+		src: url(EurostileBold.ttf);
+}
+*{
+	font-family: eurostyle;
+	color:white;
+}
+html, body{
+	margin: 0vh;
+}
+.navbar{
+	grid-area: navbar;
+	background-color: #1e1e1e;
+	height: 5vh;
+
+
+}
+.left_bar{
+	grid-area: left_bar;
+	background-color: #321A00;
+	height: 95vh;
+	width: 20vw;
+	overflow:auto;
+}
+.keyboard_container{
+	grid-area: keyboard_container;
+	background-color: #000000;
+	height: 95vh;
+	width: 80vw;
+}
+.grid_container{
+	display: grid;
+	grid-template-areas:
+		'navbar navbar'
+		'left_bar keyboard_container ';
+		margin: 0vh;
+}
+.title{
+	color: #FF3B00;
+	line-height: 0em;
+	margin-left: 10px;
+	font-family: eurostyle;
+	text-align: center;
+}
+.kbswitch{
+	background-color: #321A00;
+	height: 2vw;
+	line-height: 2em;
+	border: 2px solid #FF8C0D;
+	border-radius: 3px;
+	font-family: eurostyle;
+	font-size: .7em;
+}
+.kbswitch:hover{
+	background-color: #FF8C0D;
+}
+#esc{
+	grid-area: esc;
+}
+#f1{
+	grid-area: f1;
+}
+#f2{
+	grid-area: f2;
+}
+#f3{
+	grid-area: f3;
+}
+#f4{
+	grid-area: f4;
+}
+#f5{
+	grid-area: f5;
+}
+#f6{
+	grid-area: f6;
+}
+#f7{
+	grid-area: f7;
+}
+#f8{
+	grid-area: f8;
+}
+#f9{
+	grid-area: f9;
+}
+#f10{
+	grid-area: f10;
+}
+#f11{
+	grid-area: f11;
+}
+#f12{
+	grid-area: f12;
+}
+#prtsc{
+	grid-area: prtsc;
+}
+#scrolllock{
+	grid-area: scrolllock;
+}
+#pause{
+	grid-area: pause;
+}
+#tilde{
+	grid-area: tilde;
+}
+#one{
+	grid-area: one;
+}
+#two{
+	grid-area: two;
+}
+#three{
+	grid-area: three;
+}
+#four{
+	grid-area: four;
+}
+#five{
+	grid-area: five;
+}
+#six{
+	grid-area: six;
+}
+#seven{
+	grid-area: seven;
+}
+#eight{
+	grid-area: eight;
+}
+#nine{
+	grid-area: nine;
+}
+#zero{
+	grid-area: zero;
+}
+#hyphen{
+	grid-area: hyphen;
+}
+#equal	{
+	grid-area: equal;
+}
+#backspace{
+	grid-area: backspace;
+}
+#insert{
+	grid-area: insert;
+}
+#home{
+	grid-area: home;
+}
+#pageup{
+	grid-area: pageup;
+}
+#numlock{
+	grid-area: numlock;
+}
+#numpadslash{
+	grid-area: numpadslash;
+}
+#numpadmult{
+	grid-area: numpadmult;
+}
+#numpadhyphen{
+	grid-area: numpadhyphen;
+}
+#tab{
+	grid-area: tab;
+}
+#q{
+	grid-area: q;
+}
+#w{
+	grid-area: w;
+}
+#e{
+	grid-area: e;
+}
+#r{
+	grid-area: r;
+}
+#t{
+	grid-area: t;
+}
+#y{
+	grid-area: y;
+}
+#u{
+	grid-area: u;
+}
+#i{
+	grid-area: i;
+}
+#o{
+	grid-area: o;
+}
+#p{
+	grid-area: p;
+}
+#leftBracket{
+	grid-area: leftBracket;
+}
+#rightBracket{
+	grid-area: rightBracket;
+}
+#backslash{
+	grid-area: backslash;
+}
+#del{
+	grid-area: del;
+}
+#end{
+	grid-area: end;
+}
+#pagedown{
+	grid-area: pagedown;
+}
+#numpad7{
+	grid-area: numpad7;
+}
+#numpad8{
+	grid-area: numpad8
+}
+#numpad9{
+	grid-area: numpad9;
+}
+#plus{
+	grid-area: plus;
+	height: 4.6vw;
+}
+#caps{
+	grid-area: caps;
+}
+#a{
+	grid-area: a;
+}
+#s{
+	grid-area: s;
+}
+#d{
+	grid-area: d;
+}
+#f{
+	grid-area: f;
+}
+#g{
+	grid-area: g;
+}
+#h{
+	grid-area: h;
+}
+#j{
+	grid-area: j;
+}
+#k{
+	grid-area: k;
+}
+#l{
+	grid-area: l;
+}
+#colon{
+	grid-area: colon;
+}
+#apostrophe{
+	grid-area: apostrophe;
+}
+#enter{
+	grid-area: enter;
+}
+#numpad4{
+	grid-area: numpad4;
+}
+#numpad5{
+	grid-area: numpad5;
+}
+#numpad6{
+	grid-area: numpad6;
+}
+#leftShift{
+	grid-area: leftShift;
+}
+#z{
+	grid-area: z;
+}
+#x{
+	grid-area: x;
+}
+#c{
+	grid-area: c;
+}
+#v{
+	grid-area: v;
+}
+#b{
+	grid-area: b;
+}
+#n{
+	grid-area: n;
+}
+#m{
+	grid-area: m;
+}
+#comma{
+	grid-area: comma;
+}
+#period{
+	grid-area: period;
+}
+#slash{
+	grid-area: slash;
+}
+#rightShift{
+	grid-area: rightShift;
+}
+#upArrow{
+	grid-area: upArrow;
+}
+#numpad1{
+	grid-area: numpad1;
+}
+#numpad2{
+	grid-area: numpad2;
+}
+#numpad3{
+	grid-area: numpad3;
+}
+#numpadEnter{
+	grid-area: numpadEnter;
+	height: 4.6vw;
+}
+#leftCtrl{
+	grid-area: leftCtrl;
+}
+#leftWin{
+	grid-area: leftWin;
+}
+#leftAlt{
+	grid-area: leftAlt
+}
+#space{
+	grid-area: space;
+}
+#rightAlt{
+	grid-area: rightAlt;
+}
+#rightWin{
+	grid-area: rightWin;
+}
+#fn{
+	grid-area: fn;
+}
+#rightCtrl{
+	grid-area: rightCtrl;
+}
+#leftArrow{
+	grid-area: leftArrow;
+}
+#downArrow{
+	grid-area: downArrow;
+}
+#rightArrow{
+	grid-area: rightArrow;
+}
+#numpad0{
+	grid-area: numpad0;
+}
+#numpadperiod{
+	grid-area: numpadperiod;
+}
+
+
+.kbMini{
+	display: grid;
+	grid-template-columns: repeat(24, minmax(0, 1fr));
+	grid-template-areas:
+		'esc . f1 f2 f3 f4 . f5 f6 f7 f8 . f9 f10 f11 f12 prtsc scrolllock pause . . . . .'
+		'tilde one two three four five six seven eight nine zero hyphen equal backspace backspace . insert home pageup . numlock numpadslash numpadmult numpadhyphen'
+		'tab tab q w e r t y u i o p leftBracket rightBracket backslash . del end pagedown . numpad7 numpad8 numpad9 plus'
+		'caps caps a s d f g h j k l colon apostrophe enter enter . . . . . numpad4 numpad5 numpad6 plus'
+		'leftShift leftShift z x c v b n m comma period slash rightShift rightShift . . . upArrow . . numpad1 numpad2 numpad3 numpadEnter'
+		'. . leftCtrl leftWin leftAlt space space space space space rightAlt rightWin fn rightCtrl . . leftArrow downArrow rightArrow . numpad0 numpad0 numpadperiod numpadEnter';
+	color:white;
+	text-align: center;
+	margin:100px;
+	grid-gap:10px;
+}
+.controls{
+	border: 2px solid #FF8C0D;
+	color:white;
+	height:2em;
+}
+.controls:hover{
+	background-color: #FF8C0D;
+}
