@@ -25,6 +25,7 @@ def keymapFileParse():
             print(child.tag, child.attrib)
             for gchild in child:
                 if gchild.tag == 'Primary':
+                    #TODO sanitize inputs so its not vuln. to code injection
                         s += "<div class=\"controls\">" + child.tag + "<div>" + gchild.attrib.get('Key') + "</div>" "</div>"
 
     return render_template("binds.html", controls = s)
