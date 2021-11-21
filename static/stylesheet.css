@@ -16,12 +16,15 @@ html, body{
 
 
 }
-.left_bar{
+#left_bar{
 	grid-area: left_bar;
 	background-color: #321A00;
 	height: 95vh;
 	width: 20vw;
 	overflow:auto;
+}
+#select{
+	background-color:darkslategray;
 }
 .keyboard_container{
 	grid-area: keyboard_container;

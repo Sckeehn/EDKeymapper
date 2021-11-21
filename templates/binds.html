@@ -1,23 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="jinjavar"  content="{{readList}}"/>
     <link rel="stylesheet" href="static/stylesheet.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDKeyMapper</title>
+    <base href="."/>
+    <script type="module">
+      import { bigBoi } from "{{ url_for('static', filename='JS/ControlsList.js') }}";
+    function fuck(varList){
+      var displayedControls;
+      var concat = "";
+      document.getElementById("controlsContainer").innerHTML = "";
+      var preset = document.getElementById("preset").value;
+      console.log(varList)
+      for (var y in varList){
+        console.log(varList[y].name)
+        if (preset == varList[y].name){
+          console.log(varList[y].controls)
+          displayedControls = varList[y].controls;
+          for (var z in displayedControls){
+            console.log(displayedControls, z);
+            concat += "<div class='controls'>" + displayedControls[z] + "</div>";
+            console.log(concat);
+          }
+        }
+      }
+    document.getElementById("controlsContainer").innerHTML = concat;
+}
+    document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
+
+
+
+    </script>
   </head>
   <body>
     <div class = "grid_container">
       <div class = "navbar">
         <h1 class= "title">EDKeyMapper</h1>
       </div>
-      <div class = "left_bar">
+      <div id = "left_bar">
           <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="keymapFile"/>
             <input type="submit" value="upload" />
           </form>
-          {{ controls|safe }}
+          <form>
+            <select id="preset">
+              <option value="all">All</option>
+              <option value="flightRotation">Flight Rotation</option>
+              <option value="flightThrust">Flight Thrust</option>
+              <option value="flightThrottle">Flight Throttle</option>
+              <option value="alternateFlight">Alternate Flight</option>
+              <option value="flightLandingOverrides">Flight Landing</option>
+              <option value="flightMisc">Flight Misc</option>
+              <option value="targeting">Targeting</option>
+              <option value="weapons">Weapons</option>
+              <option value="misc">Misc</option>
+              <option value="modeSwitches">Mode Switches</option>
+              <option value="alternateFlight">Interface Mode</option>
+              <option value="headlook">Headlook</option>
+              <option value="galaxyMap">Galaxy Map</option>
+              <option value="driving">Driving</option>
+              <option value="drivingTargeting">Driving Targeting</option>
+              <option value="drivingTurret">Driving Turret</option>
+              <option value="drivingThrottle">Driving Throttle</option>
+              <option value="drivingMisc">Driving Misc</option>
+              <option value="drivingModeSwitches">Driving Mode Switches</option>
+              <option value="multiCrew">Multi-Crew</option>
+              <option value="fighterOrders">Fighter Orders</option>
+              <option value="cameraSuite">Camera Suite</option>
+              <option value="freeCamera">Free Camera</option>
+              <option value="storeCamera">Store Camera</option>
+              <option value="holoMe">Holo-Me</option>
+              <option value="playlist">Playlist</option>
+              <option value="FSS">FSS</option>
+              <option value="DSS">DSS</option>
+            </select>
+          <div id="controlsContainer"></div>
       </div>
       <div class = "keyboard_container">
         <div class = "kbMini">
