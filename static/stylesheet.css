@@ -8,6 +8,19 @@
 }
 html, body{
 	margin: 0vh;
+	z-index: 1;
+}
+#cursorFollow{
+	height:100px;
+	width:100px;
+	z-index: 100;
+	background-color: blueviolet;
+	position: absolute;
+	display: none;
+	pointer-events: none;
+}
+.kbswitch:hover ~ #cursorFollow{
+	display:inline;
 }
 .navbar{
 	grid-area: navbar;
@@ -106,7 +119,7 @@ html, body{
 #pause{
 	grid-area: pause;
 }
-#tilde{
+#grave{
 	grid-area: tilde;
 }
 #one{
@@ -139,10 +152,10 @@ html, body{
 #zero{
 	grid-area: zero;
 }
-#hyphen{
+#minus{
 	grid-area: hyphen;
 }
-#equal	{
+#equals{
 	grid-area: equal;
 }
 #backspace{
@@ -160,14 +173,14 @@ html, body{
 #numlock{
 	grid-area: numlock;
 }
-#numpadslash{
-	grid-area: numpadslash;
+#numpad_slash{
+	grid-area: numpad_slash;
 }
-#numpadmult{
-	grid-area: numpadmult;
+#numpad_multiply{
+	grid-area: numpad_mult;
 }
-#numpadhyphen{
-	grid-area: numpadhyphen;
+#numpad_minus{
+	grid-area: numpad_hyphen;
 }
 #tab{
 	grid-area: tab;
@@ -202,16 +215,16 @@ html, body{
 #p{
 	grid-area: p;
 }
-#leftBracket{
+#leftbracket{
 	grid-area: leftBracket;
 }
-#rightBracket{
+#rightbracket{
 	grid-area: rightBracket;
 }
 #backslash{
 	grid-area: backslash;
 }
-#del{
+#delete{
 	grid-area: del;
 }
 #end{
@@ -220,14 +233,14 @@ html, body{
 #pagedown{
 	grid-area: pagedown;
 }
-#numpad7{
-	grid-area: numpad7;
+#numpad_7{
+	grid-area: numpad_7;
 }
-#numpad8{
-	grid-area: numpad8
+#numpad_8{
+	grid-area: numpad_8
 }
-#numpad9{
-	grid-area: numpad9;
+#numpad_9{
+	grid-area: numpad_9;
 }
 #plus{
 	grid-area: plus;
@@ -272,16 +285,16 @@ html, body{
 #enter{
 	grid-area: enter;
 }
-#numpad4{
-	grid-area: numpad4;
+#numpad_4{
+	grid-area: numpad_4;
 }
-#numpad5{
-	grid-area: numpad5;
+#numpad_5{
+	grid-area: numpad_5;
 }
-#numpad6{
-	grid-area: numpad6;
+#numpad_6{
+	grid-area: numpad_6;
 }
-#leftShift{
+#leftshift{
 	grid-area: leftShift;
 }
 #z{
@@ -305,72 +318,72 @@ html, body{
 #m{
 	grid-area: m;
 }
-#comma{
+#lessthan{
 	grid-area: comma;
 }
-#period{
+#greaterthan{
 	grid-area: period;
 }
 #slash{
 	grid-area: slash;
 }
-#rightShift{
+#rightshift{
 	grid-area: rightShift;
 }
-#upArrow{
+#uparrow{
 	grid-area: upArrow;
 }
-#numpad1{
-	grid-area: numpad1;
+#numpad_1{
+	grid-area: numpad_1;
 }
-#numpad2{
-	grid-area: numpad2;
+#numpad_2{
+	grid-area: numpad_2;
 }
-#numpad3{
-	grid-area: numpad3;
+#numpad_3{
+	grid-area: numpad_3;
 }
-#numpadEnter{
-	grid-area: numpadEnter;
+#numpad_enter{
+	grid-area: numpad_Enter;
 	height: 4.6vw;
 }
-#leftCtrl{
+#leftcontrol{
 	grid-area: leftCtrl;
 }
-#leftWin{
+#leftwin{
 	grid-area: leftWin;
 }
-#leftAlt{
+#leftalt{
 	grid-area: leftAlt
 }
 #space{
 	grid-area: space;
 }
-#rightAlt{
+#rightalt{
 	grid-area: rightAlt;
 }
-#rightWin{
+#rightwin{
 	grid-area: rightWin;
 }
 #fn{
 	grid-area: fn;
 }
-#rightCtrl{
+#rightcontrol{
 	grid-area: rightCtrl;
 }
-#leftArrow{
+#leftarrow{
 	grid-area: leftArrow;
 }
-#downArrow{
+#downarrow{
 	grid-area: downArrow;
 }
-#rightArrow{
+#rightarrow{
 	grid-area: rightArrow;
 }
-#numpad0{
-	grid-area: numpad0;
+#numpad_0{
+	grid-area: numpad_0;
 }
-#numpadperiod{
-	grid-area: numpadperiod;
+#numpad_period{
+	grid-area: numpad_period;
 }
 
 
@@ -379,11 +392,11 @@ html, body{
 	grid-template-columns: repeat(24, minmax(0, 1fr));
 	grid-template-areas:
 		'esc . f1 f2 f3 f4 . f5 f6 f7 f8 . f9 f10 f11 f12 prtsc scrolllock pause . . . . .'
-		'tilde one two three four five six seven eight nine zero hyphen equal backspace backspace . insert home pageup . numlock numpadslash numpadmult numpadhyphen'
-		'tab tab q w e r t y u i o p leftBracket rightBracket backslash . del end pagedown . numpad7 numpad8 numpad9 plus'
-		'caps caps a s d f g h j k l colon apostrophe enter enter . . . . . numpad4 numpad5 numpad6 plus'
-		'leftShift leftShift z x c v b n m comma period slash rightShift rightShift . . . upArrow . . numpad1 numpad2 numpad3 numpadEnter'
-		'. . leftCtrl leftWin leftAlt space space space space space rightAlt rightWin fn rightCtrl . . leftArrow downArrow rightArrow . numpad0 numpad0 numpadperiod numpadEnter';
+		'tilde one two three four five six seven eight nine zero hyphen equal backspace backspace . insert home pageup . numlock numpad_slash numpad_mult numpad_hyphen'
+		'tab tab q w e r t y u i o p leftBracket rightBracket backslash . del end pagedown . numpad_7 numpad_8 numpad_9 plus'
+		'caps caps a s d f g h j k l colon apostrophe enter enter . . . . . numpad_4 numpad_5 numpad_6 plus'
+		'leftShift leftShift z x c v b n m comma period slash rightShift rightShift . . . upArrow . . numpad_1 numpad_2 numpad_3 numpad_Enter'
+		'. . leftCtrl leftWin leftAlt space space space space space rightAlt rightWin fn rightCtrl . . leftArrow downArrow rightArrow . numpad_0 numpad_0 numpad_period numpad_Enter';
 	color:white;
 	text-align: center;
 	margin:100px;
@@ -396,4 +409,14 @@ html, body{
 }
 .controls:hover{
 	background-color: #FF8C0D;
+}
+#preset{
+	background-color: #1e1e1e;
+	appearance:none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	font-family: eurostyle;
+}
+option{
+	font-family:eurostyle;
 }

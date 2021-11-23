@@ -1,40 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="jinjavar"  content="{{readList}}"/>
+    <meta name="jinjavar"  content="{{ readList }}"/>
+    <!-- <meta name="bindsJSON" content="{{ bindsJSON }}"/> -->
     <link rel="stylesheet" href="static/stylesheet.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDKeyMapper</title>
     <base href="."/>
-    <script type="module">
-      import { bigBoi } from "{{ url_for('static', filename='JS/ControlsList.js') }}";
-    function fuck(varList){
-      var displayedControls;
-      var concat = "";
-      document.getElementById("controlsContainer").innerHTML = "";
-      var preset = document.getElementById("preset").value;
-      console.log(varList)
-      for (var y in varList){
-        console.log(varList[y].name)
-        if (preset == varList[y].name){
-          console.log(varList[y].controls)
-          displayedControls = varList[y].controls;
-          for (var z in displayedControls){
-            console.log(displayedControls, z);
-            concat += "<div class='controls'>" + displayedControls[z] + "</div>";
-            console.log(concat);
-          }
-        }
-      }
-    document.getElementById("controlsContainer").innerHTML = concat;
-}
-    document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
 
-
-
-    </script>
   </head>
   <body>
     <div class = "grid_container">
@@ -99,7 +74,7 @@
             <div id="scrolllock" class="kbswitch">Scroll Lock</div>
             <div id="pause" class="kbswitch">Pause</div>
             <!-- ROW 2 -->
-            <div id="tilde" class="kbswitch">`</div>
+            <div id="grave" class="kbswitch">`</div>
             <div id="one" class="kbswitch">1</div>
             <div id="two" class="kbswitch">2</div>
             <div id="three" class="kbswitch">3</div>
@@ -110,16 +85,16 @@
             <div id="eight" class="kbswitch">8</div>
             <div id="nine" class="kbswitch">9</div>
             <div id="zero" class="kbswitch">0</div>
-            <div id="hyphen" class="kbswitch">-</div>
-            <div id="equal" class="kbswitch">=</div>
+            <div id="minus" class="kbswitch">-</div>
+            <div id="equals" class="kbswitch">=</div>
             <div id="backspace" class="kbswitch">backspace</div>
             <div id="insert" class="kbswitch">insert</div>
             <div id="home" class="kbswitch">home</div>
             <div id="pageup" class="kbswitch">page up</div>
             <div id="numlock" class="kbswitch">num lock</div>
-            <div id="numpadslash" class="kbswitch">/</div>
-            <div id="numpadmult" class="kbswitch">*</div>
-            <div id="numpadhyphen" class="kbswitch">-</div>
+            <div id="numpad_slash" class="kbswitch">/</div>
+            <div id="numpad_multiply" class="kbswitch">*</div>
+            <div id="numpad_minus" class="kbswitch">-</div>
             <!-- ROW 3 -->
             <div id="tab" class="kbswitch">tab</div>
             <div id="q" class="kbswitch">q</div>
@@ -132,15 +107,15 @@
             <div id="i" class="kbswitch">i</div>
             <div id="o" class="kbswitch">o</div>
             <div id="p" class="kbswitch">p</div>
-            <div id="leftBracket" class="kbswitch">[</div>
-            <div id="rightBracket" class="kbswitch">]</div>
+            <div id="leftbracket" class="kbswitch">[</div>
+            <div id="rightbracket" class="kbswitch">]</div>
             <div id="backslash" class="kbswitch">\</div>
-            <div id="del" class="kbswitch">del</div>
+            <div id="delete" class="kbswitch">del</div>
             <div id="end" class="kbswitch">end</div>
             <div id="pagedown" class="kbswitch">page down</div>
-            <div id="numpad7" class="kbswitch">7</div>
-            <div id="numpad8" class="kbswitch">8</div>
-            <div id="numpad9" class="kbswitch">9</div>
+            <div id="numpad_7" class="kbswitch">7</div>
+            <div id="numpad_8" class="kbswitch">8</div>
+            <div id="numpad_9" class="kbswitch">9</div>
             <div id="plus" class="kbswitch">+</div>
             <!-- ROW 4 -->
             <div id="caps" class="kbswitch">caps lock</div>
@@ -156,11 +131,11 @@
             <div id="colon" class="kbswitch">;</div>
             <div id="apostrophe" class="kbswitch">''</div>
             <div id="enter" class="kbswitch">return</div>
-            <div id="numpad4" class="kbswitch">4</div>
-            <div id="numpad5" class="kbswitch">5</div>
-            <div id="numpad6" class="kbswitch">6</div>
+            <div id="numpad_4" class="kbswitch">4</div>
+            <div id="numpad_5" class="kbswitch">5</div>
+            <div id="numpad_6" class="kbswitch">6</div>
             <!-- ROW 5 -->
-            <div id="leftShift" class="kbswitch">shift</div>
+            <div id="leftshift" class="kbswitch">shift</div>
             <div id="z" class="kbswitch">z</div>
             <div id="x" class="kbswitch">x</div>
             <div id="c" class="kbswitch">c</div>
@@ -168,30 +143,146 @@
             <div id="b" class="kbswitch">b</div>
             <div id="n" class="kbswitch">n</div>
             <div id="m" class="kbswitch">m</div>
-            <div id="comma" class="kbswitch">,</div>
-            <div id="period" class="kbswitch">.</div>
+            <div id="lessthan" class="kbswitch">,</div>
+            <div id="greaterthan" class="kbswitch">.</div>
             <div id="slash" class="kbswitch">/</div>
-            <div id="rightShift" class="kbswitch">shift</div>
-            <div id="upArrow" class="kbswitch">UP</div>
-            <div id="numpad1" class="kbswitch">1</div>
-            <div id="numpad2" class="kbswitch">2</div>
-            <div id="numpad3" class="kbswitch">3</div>
-            <div id="numpadEnter" class="kbswitch">enter</div>
+            <div id="rightshift" class="kbswitch">shift</div>
+            <div id="uparrow" class="kbswitch">UP</div>
+            <div id="numpad_1" class="kbswitch">1</div>
+            <div id="numpad_2" class="kbswitch">2</div>
+            <div id="numpad_3" class="kbswitch">3</div>
+            <div id="numpad_enter" class="kbswitch">enter</div>
             <!-- ROW 6 -->
-            <div id="leftCtrl" class="kbswitch">ctrl</div>
-            <div id="leftWin" class="kbswitch">win</div>
-            <div id="leftAlt" class="kbswitch">alt</div>
+            <div id="leftcontrol" class="kbswitch">ctrl</div>
+            <div id="leftwin" class="kbswitch">win</div>
+            <div id="leftalt" class="kbswitch">alt</div>
             <div id="space" class="kbswitch">space</div>
-            <div id="rightAlt" class="kbswitch">alt</div>
-            <div id="rightWin" class="kbswitch">win</div>
+            <div id="rightalt" class="kbswitch">alt</div>
+            <div id="rightwin" class="kbswitch">win</div>
             <div id="fn" class="kbswitch">fn</div>
-            <div id="rightCtrl" class="kbswitch">ctrl</div>
-            <div id="leftArrow" class="kbswitch">LEFT</div>
-            <div id="downArrow" class="kbswitch">DOWN</div>
-            <div id="rightArrow" class="kbswitch">RIGHT</div>
-            <div id="numpad0" class="kbswitch">0</div>
-            <div id="numpadperiod" class="kbswitch">.</div>
+            <div id="rightcontrol" class="kbswitch">ctrl</div>
+            <div id="leftarrow" class="kbswitch">LEFT</div>
+            <div id="downarrow" class="kbswitch">DOWN</div>
+            <div id="rightarrow" class="kbswitch">RIGHT</div>
+            <div id="numpad_0" class="kbswitch">0</div>
+            <div id="numpad_period" class="kbswitch">.</div>
+            <div id="cursorFollow">
+            </div>
         </div>
       </div>
+    </div>
+      <script type="module">
+      import { bigBoi } from "{{ url_for('static', filename='JS/ControlsList.js') }}";
+      window.onload=function() {
+      var cursorFollow = document.getElementById("cursorFollow");
+        const onMouseMove = (e) =>{
+          cursorFollow.style.left = e.pageX-50 + 'px';
+          cursorFollow.style.top = e.pageY+10 + 'px';
+          if (document.elementFromPoint(e.pageX, e.pageY) == null){
+            //pass
+          }
+          else{
+            var whatHover = document.elementFromPoint(e.pageX, e.pageY)
+            if(whatHover.id == ""){
+              //pass
+            }
+            else{
+              var whatHoverId = whatHover.id
+              var controlBound = document.getElementById(whatHoverId).getAttribute("control")
+              document.getElementById("cursorFollow").innerHTML = controlBound;
+            }
+          }
+        }
+        document.addEventListener('mousemove', onMouseMove);
+
+
+
+      function fuck(varList){
+        for(m in document.getElementsByClassName('kbswitch')){
+          var fuckme = document.getElementsByClassName('kbswitch')
+          fuckme.item(m).style.backgroundColor = "#321A00";
+        }
+
+        var displayedControls;
+        var bindsJSON = "{{ bindsJSON }}"
+        bindsJSON = bindsJSON.replaceAll(/&#34;/ig,'"');
+        console.log(bindsJSON)
+        var jsonThingy = JSON.parse(bindsJSON)
+        console.log(jsonThingy)
+        var concat = "";
+        document.getElementById("controlsContainer").innerHTML = "";
+        var preset = document.getElementById("preset").value;
+        console.log(varList)
+        for (var y in varList){
+          console.log(varList[y].name)
+          if (preset == varList[y].name){
+            console.log(varList[y].controls)
+            displayedControls = varList[y].controls;
+            for (var z in displayedControls){
+              if(displayedControls[z] in jsonThingy){
+                concat += "<div class='controls'>" + displayedControls[z] + "<div>" + jsonThingy[displayedControls[z]] + "</div>" + "</div>"
+                var stripped = jsonThingy[displayedControls[z]].replace("Key_", "")
+                console.log(stripped)
+                switch (stripped){
+                  case '1':
+                    document.getElementById("one").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("one").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '2':
+                    document.getElementById("two").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("two").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '3':
+                    document.getElementById("three").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("three").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '4':
+                    document.getElementById("four").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("four").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '5':
+                    document.getElementById("five").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("five").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '6':
+                    document.getElementById("six").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("six").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '7':
+                    document.getElementById("seven").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("seven").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '8':
+                    document.getElementById("eight").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("eight").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '9':
+                    document.getElementById("nine").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("nine").setAttribute("control", displayedControls[z]);
+                  break;
+                  case '0':
+                    document.getElementById("zero").style.backgroundColor = "#FF8C0D";
+                    document.getElementById("zero").setAttribute("control", displayedControls[z]);
+                  break;
+                  default:
+                    document.getElementById(stripped.toLowerCase()).style.backgroundColor = "#FF8C0D";
+                    document.getElementById(stripped.toLowerCase()).setAttribute("control", displayedControls[z]);
+                }
+              }
+              else{
+                console.log(displayedControls, z);
+                concat += "<div class='controls'>" + displayedControls[z] + "</div>";
+                console.log(concat);
+              }
+            }
+          }
+        }
+      document.getElementById("controlsContainer").innerHTML = concat;
+  }
+      document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
+
+
+  }
+      </script>
   </body>
 </html>

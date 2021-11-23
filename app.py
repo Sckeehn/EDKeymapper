@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from ControlList     import *
 import xml.etree.ElementTree as ET
+import json
 
 app = Flask(__name__)
 
@@ -14,7 +15,8 @@ def hello_world():
 @app.route("/upload", methods=['GET', 'POST'])
 def keymapFileParse():
     s = ""
-    readList = ""
+    readList = []
+    keyBinds = {}
     if request.method == 'POST':
         preset = request.form.get('preset')
         f = request.files['keymapFile']
@@ -24,13 +26,15 @@ def keymapFileParse():
         tree = ET.parse(bindFile)
         root = tree.getroot()
         for child in root:
-            print(child.tag, child.attrib)
             for gchild in child:
                 if gchild.tag == 'Primary' or gchild.tag == 'Secondary':
                     #TODO sanitize inputs so its not vuln. to code injection
                         #s += "<div class=\"controls\">" + child.tag + "<div>" + gchild.attrib.get('Key') + "</div>" "</div>"
-                        readList += child.tag
-
-    return render_template("binds.html", readList = readList)
-
-    bindFile.close()
+                        readList += child
+                        if gchild.attrib['Device'] == "Keyboard":
+                            keyBinds[child.tag] = gchild.attrib['Key']
+                            print(keyBinds)
+        bindsJSON = json.dumps(keyBinds)
+        return render_template("binds.html", readList = readList, bindsJSON = bindsJSON)
+    else:
+        return render_template("binds.html")
