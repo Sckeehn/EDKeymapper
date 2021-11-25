@@ -196,8 +196,8 @@
         document.addEventListener('mousemove', onMouseMove);
 
 
-
       function fuck(varList){
+        //Resets the Highlighting When changing presets
         for(m in document.getElementsByClassName('kbswitch')){
           var fuckme = document.getElementsByClassName('kbswitch')
           fuckme.item(m).style.backgroundColor = "#321A00";
@@ -206,23 +206,27 @@
         var displayedControls;
         var bindsJSON = "{{ bindsJSON }}"
         bindsJSON = bindsJSON.replaceAll(/&#34;/ig,'"');
-        console.log(bindsJSON)
+      //  console.log(bindsJSON)
         var jsonThingy = JSON.parse(bindsJSON)
-        console.log(jsonThingy)
+        //console.log(jsonThingy)
+        var invertToggles = "{{ invertTogglesPartTwo }}"
+        var invertTogglesDos = invertToggles.replaceAll(/&#34;/ig, '"')
+        //console.log(invertTogglesDos)
+        var invertTogglesTres = JSON.parse(invertTogglesDos)
         var concat = "";
         document.getElementById("controlsContainer").innerHTML = "";
         var preset = document.getElementById("preset").value;
-        console.log(varList)
+        //console.log(varList)
         for (var y in varList){
-          console.log(varList[y].name)
+          //console.log(varList[y].name)
           if (preset == varList[y].name){
-            console.log(varList[y].controls)
+            //console.log(varList[y].controls)
             displayedControls = varList[y].controls;
             for (var z in displayedControls){
               if(displayedControls[z] in jsonThingy){
                 concat += "<div class='controls'>" + displayedControls[z] + "<div>" + jsonThingy[displayedControls[z]] + "</div>" + "</div>"
                 var stripped = jsonThingy[displayedControls[z]].replace("Key_", "")
-                console.log(stripped)
+                //console.log(stripped)
                 switch (stripped){
                   case '1':
                     document.getElementById("one").style.backgroundColor = "#FF8C0D";
@@ -269,20 +273,37 @@
                     document.getElementById(stripped.toLowerCase()).setAttribute("control", displayedControls[z]);
                 }
               }
+              if (displayedControls[z] in invertTogglesTres){
+                if (invertTogglesTres[displayedControls[z]] == 1){
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "></div> </div>"
+
+                  //document.getElementById(displayedControls[z]).checked = true;
+                }
+                else{
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "></div> </div>"
+
+                //  document.getElementById(displayedControls[z]).checked = false;
+                }
+              }
               else{
-                console.log(displayedControls, z);
+                //console.log(displayedControls, z);
                 concat += "<div class='controls'>" + displayedControls[z] + "</div>";
-                console.log(concat);
+                //console.log(concat);
               }
             }
           }
         }
       document.getElementById("controlsContainer").innerHTML = concat;
-  }
+        for (l in invertTogglesTres){
+          if (invertTogglesTres[l] == 1){
+            console.log(invertTogglesTres[l])
+            document.getElementById(l).checked = true;
+          }
+        }
+      }
       document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
+}
 
-
-  }
       </script>
   </body>
 </html>

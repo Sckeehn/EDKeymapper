@@ -16,7 +16,7 @@
 	<MouseGUI Value="1"/>
 	<YawAxisRaw>
 		<Binding Device="{NoDevice}" Key=""/>
-		<Inverted Value="0"/>
+		<Inverted Value="1"/>
 		<Deadzone Value="0.00000000"/>
 	</YawAxisRaw>
 	<YawLeftButton>

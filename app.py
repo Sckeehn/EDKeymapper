@@ -17,6 +17,7 @@ def keymapFileParse():
     s = ""
     readList = []
     keyBinds = {}
+    invertToggles = {}
     if request.method == 'POST':
         preset = request.form.get('preset')
         f = request.files['keymapFile']
@@ -33,8 +34,15 @@ def keymapFileParse():
                         readList += child
                         if gchild.attrib['Device'] == "Keyboard":
                             keyBinds[child.tag] = gchild.attrib['Key']
-                            print(keyBinds)
+
+                if gchild.tag == 'Inverted':
+                    invertToggles[child.tag] = gchild.attrib['Value']
+                else:
+                    pass
+
+
         bindsJSON = json.dumps(keyBinds)
-        return render_template("binds.html", readList = readList, bindsJSON = bindsJSON)
+        invertTogglesPartTwo = json.dumps(invertToggles)
+        return render_template("binds.html", invertTogglesPartTwo = invertTogglesPartTwo, bindsJSON = bindsJSON)
     else:
         return render_template("binds.html")
