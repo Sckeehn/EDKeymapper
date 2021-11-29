@@ -26,8 +26,9 @@ html, body{
 	grid-area: navbar;
 	background-color: #1e1e1e;
 	height: 5vh;
-
-
+}
+.deadZoneSliderTextBox{
+	background-color: black;
 }
 #left_bar{
 	grid-area: left_bar;

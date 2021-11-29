@@ -18,6 +18,7 @@ def keymapFileParse():
     readList = []
     keyBinds = {}
     invertToggles = {}
+    deadzoneSlider = {}
     if request.method == 'POST':
         preset = request.form.get('preset')
         f = request.files['keymapFile']
@@ -37,12 +38,15 @@ def keymapFileParse():
 
                 if gchild.tag == 'Inverted':
                     invertToggles[child.tag] = gchild.attrib['Value']
+                if gchild.tag == 'Deadzone':
+                    deadzoneSlider[child.tag] = gchild.attrib['Value']
                 else:
                     pass
 
 
         bindsJSON = json.dumps(keyBinds)
         invertTogglesPartTwo = json.dumps(invertToggles)
-        return render_template("binds.html", invertTogglesPartTwo = invertTogglesPartTwo, bindsJSON = bindsJSON)
+        deadzoneSlider = json.dumps(deadzoneSlider)
+        return render_template("binds.html", invertTogglesPartTwo = invertTogglesPartTwo, bindsJSON = bindsJSON, deadzoneSlider = deadzoneSlider)
     else:
         return render_template("binds.html")
