@@ -176,7 +176,9 @@
       window.onload=function() {
         function makeListener(item, controls){
           if (controls.includes(item)){
-            document.getElementById(item).addEventListener("click", flubber => {updateTextInput(item)})
+            document.getElementById(item).addEventListener("change", flubber => {updateTextInput(item)})
+            var itemText = item + "Text"
+            document.getElementById(itemText).addEventListener("input", flobber => {updateSliderPos(item)})
             console.log(document.getElementById(item))
           }
         }
@@ -187,6 +189,11 @@
           var controlValue = document.getElementById(controlName).value;
           console.log(controlValue)
           document.getElementById(controlNameAppend).value = controlValue;
+        }
+        function updateSliderPos(controlName){
+          var controlNameAppend = controlName + "Text"
+          var controlValue = document.getElementById(controlNameAppend).value;
+          document.getElementById(controlName).value = controlValue;
         }
         //Makes the invisible div follow the cursor
       var cursorFollow = document.getElementById("cursorFollow");
