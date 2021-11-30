@@ -406,7 +406,7 @@ html, body{
 .controls{
 	border: 2px solid #FF8C0D;
 	color:white;
-	height:2em;
+	/* height:4em; */
 }
 .controls:hover{
 	background-color: #FF8C0D;

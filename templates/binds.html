@@ -174,10 +174,18 @@
       <script type="module">
       import { bigBoi } from "{{ url_for('static', filename='JS/ControlsList.js') }}";
       window.onload=function() {
+        function makeListener(item, controls){
+          if (controls.includes(item)){
+            document.getElementById(item).addEventListener("click", flubber => {updateTextInput(item)})
+            console.log(document.getElementById(item))
+          }
+        }
         function updateTextInput(controlName){
           console.log("RubberDucky")
-          controlNameAppend = controlName + "Text"
+          var controlNameAppend = controlName + "Text"
+          console.log(controlNameAppend)
           var controlValue = document.getElementById(controlName).value;
+          console.log(controlValue)
           document.getElementById(controlNameAppend).value = controlValue;
         }
         //Makes the invisible div follow the cursor
@@ -284,8 +292,18 @@
                     document.getElementById(stripped.toLowerCase()).setAttribute("control", displayedControls[z]);
                 }
               }
+              if (displayedControls[z] in invertTogglesTres && displayedControls[z] in deadzoneSliderTres){
+                if (invertTogglesTres[displayedControls[z]] == 1){
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div></div>"
+                  console.log(displayedControls[z])
+                }
+                else{
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div> </div>"
+                }
+
+              }
               //Sees if control has an invert switch and deals with it accordingly
-              if (displayedControls[z] in invertTogglesTres){
+              if (displayedControls[z] in invertTogglesTres && !(displayedControls[z] in deadzoneSliderTres)){
                 if (invertTogglesTres[displayedControls[z]] == 1){
                   concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "> <label for=\"" + displayedControls[z] + "\">Invert</label></div></div>"
                   console.log(displayedControls[z])
@@ -295,7 +313,7 @@
                   concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "> <label for=\"" + displayedControls[z] + "\"></label>Invert</div> </div>"
                 }
               }
-              if (displayedControls[z] in deadzoneSliderTres){
+              if (displayedControls[z] in deadzoneSliderTres && !(displayedControls[z] in invertTogglesTres)){
                 concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"range\" id=" + displayedControls[z] + " min=\"0\" max=\"1\" step=\".001\" value=" + deadzoneSliderTres[z] + "><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div></div>"
                 console.log(deadzoneSliderTres[displayedControls[z]])
               }
@@ -310,13 +328,9 @@
       console.log(displayedControls)
       document.getElementById("controlsContainer").innerHTML = concat;
       var keys = Object.keys(deadzoneSliderTres)
-      for (k in keys){
-        console.log(keys[k])
-        if (keys[k] in displayedControls){
-          console.log("ducccc")
-          document.getElementById(keys[k]).addEventListener("change", updateTextInput(deadzoneSliderTres[k]))
-        }
-      }
+    //  keys.map(makeListener(displayedControls))
+      .map((keys) => makeListener(keys, displayedControls))
+
         for (l in invertTogglesTres){
           if (l in displayedControls){
             if (invertTogglesTres[l] == 1){
@@ -326,6 +340,7 @@
           }
         }
       }
+
       document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
       //Makes Sliders match Text boxes for deadzoneSlider
 
