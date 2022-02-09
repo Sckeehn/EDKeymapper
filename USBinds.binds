@@ -17,7 +17,7 @@
 	<YawAxisRaw>
 		<Binding Device="{NoDevice}" Key=""/>
 		<Inverted Value="1"/>
-		<Deadzone Value="0.00000000"/>
+		<Deadzone Value="0.34"/>
 	</YawAxisRaw>
 	<YawLeftButton>
 		<Primary Device="{NoDevice}" Key=""/>
@@ -27,7 +27,7 @@
 		<Primary Device="{NoDevice}" Key=""/>
 		<Secondary Device="{NoDevice}" Key=""/>
 	</YawRightButton>
-	<YawToRollMode Value="Bindings_YawIntoRollNone"/>
+	<YawToRollMode Value="Bindings_YawIntoRollTime"/>
 	<YawToRollSensitivity Value="0.40000001"/>
 	<YawToRollMode_FAOff Value=""/>
 	<YawToRollButton>

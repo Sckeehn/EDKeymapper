@@ -17,10 +17,6 @@
         <h1 class= "title">EDKeyMapper</h1>
       </div>
       <div id = "left_bar">
-          <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="keymapFile"/>
-            <input type="submit" value="upload" />
-          </form>
           <form>
             <select id="preset">
               <option value="all">All</option>
@@ -172,24 +168,31 @@
       </div>
     </div>
       <script type="module">
+      //Start JS functionality
+      //imports controls lists by default game categories from a static file
       import { bigBoi } from "{{ url_for('static', filename='JS/ControlsList.js') }}";
+
+      //array of the controls that are simple on/off toggles that are not a sub-option of another control
+      var baseToggles = ["DeployHardpointsOnFire", "EnableCameraLockOn", "MouseHeadlook", "MouseHeadlookInvert", "HeadlookDefault", "HeadlookResetOnToggle", "HeadlookSmoothing", "DriveAssistDefault", "MouseBuggySteeringXDecay", "MouseBuggyRollingXDecay", "MouseBuggyYDecay", "MouseTurretXDecay", "MouseTurretYDecay", "MultiCrewThirdPersonMouseXDecay", "MultiCrewThirdPersonMouseYDecay", "FreeCamMouseYDecay", "FreeCamMouseXDecay", "FSSMouseXDecay", "FSSMouseYDecay", "SAAThirdPersonMouseXDecay", "SAAThirdPersonMouseYDecay"]
+
       window.onload=function() {
+        //Adds an event listener to attach sliders to their respective text boxes
+        //Flubber and Flobber are just placeholder names they are not used anywhere else
         function makeListener(item, controls){
           if (controls.includes(item)){
             document.getElementById(item).addEventListener("change", flubber => {updateTextInput(item)})
             var itemText = item + "Text"
             document.getElementById(itemText).addEventListener("input", flobber => {updateSliderPos(item)})
-            console.log(document.getElementById(item))
           }
         }
+        //called by makelistener, this is what the listener does when it is activated
+        //this one takes input from the slider and then sends the update to the text box
         function updateTextInput(controlName){
-          console.log("RubberDucky")
           var controlNameAppend = controlName + "Text"
-          console.log(controlNameAppend)
           var controlValue = document.getElementById(controlName).value;
-          console.log(controlValue)
           document.getElementById(controlNameAppend).value = controlValue;
         }
+        //opposite of updateTextInput, this fxn just takes input from text box and updates the slider
         function updateSliderPos(controlName){
           var controlNameAppend = controlName + "Text"
           var controlValue = document.getElementById(controlNameAppend).value;
@@ -217,6 +220,7 @@
         }
         document.addEventListener('mousemove', onMouseMove);
 
+      //main fxn,runs on preset selection changing, TODO: make it load it one first page load
       function fuck(varList){
         //Resets the Highlighting When changing presets
         for(m in document.getElementsByClassName('kbswitch')){
@@ -227,19 +231,26 @@
         var displayedControls;
         var bindsJSON = "{{ bindsJSON }}"
         bindsJSON = bindsJSON.replaceAll(/&#34;/ig,'"');
-      //  console.log(bindsJSON)
         var jsonThingy = JSON.parse(bindsJSON)
         //Takes dict of python invert controls and parses it into JS object
         var invertToggles = "{{ invertTogglesPartTwo }}"
         var invertTogglesDos = invertToggles.replaceAll(/&#34;/ig, '"')
-        //console.log(invertTogglesDos)
         var invertTogglesTres = JSON.parse(invertTogglesDos)
-        console.log(invertTogglesTres)
         //Takes python Deadzone dict and parses into JS Object
         var deadzoneSlider = "{{ deadzoneSlider }}"
         var deadzoneSliderDos = deadzoneSlider.replaceAll(/&#34;/ig, '"')
         var deadzoneSliderTres = JSON.parse(deadzoneSliderDos)
+        var axisBindings = "{{ axisBindings }}"
+        axisBindings = axisBindings.replaceAll(/&#34;/ig, '"')
+        axisBindings = axisBindings.replaceAll(/&#39;/ig, '"')
+        axisBindings = JSON.parse(axisBindings)
+        var baseControls = "{{ baseControls }}"
+        baseControls = baseControls.replaceAll(/&#34;/ig, '"')
+        baseControls = baseControls.replaceAll(/&#39;/ig, '"')
+        baseControls = JSON.parse(baseControls)
+
         var concat = "";
+        var baseIsSlider = [];
         document.getElementById("controlsContainer").innerHTML = "";
         var preset = document.getElementById("preset").value;
         //console.log(varList)
@@ -248,6 +259,7 @@
           if (preset == varList[y].name){
             //console.log(varList[y].controls)
             displayedControls = varList[y].controls;
+            //main fxn loop to sort controls into categories so that it can display the correct options associated
             for (var z in displayedControls){
               if(displayedControls[z] in jsonThingy){
                 concat += "<div class='controls'>" + displayedControls[z] + "<div>" + jsonThingy[displayedControls[z]] + "</div>" + "</div>"
@@ -299,57 +311,125 @@
                     document.getElementById(stripped.toLowerCase()).setAttribute("control", displayedControls[z]);
                 }
               }
-              if (displayedControls[z] in invertTogglesTres && displayedControls[z] in deadzoneSliderTres){
+              else if (displayedControls[z] in invertTogglesTres && displayedControls[z] in deadzoneSliderTres){
                 if (invertTogglesTres[displayedControls[z]] == 1){
-                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div></div>"
-                  console.log(displayedControls[z])
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\" value=\"" + deadzoneSliderTres[displayedControls[z]] + "\"/></div></div>"
                 }
                 else{
-                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div> </div>"
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\" value=\"" + deadzoneSliderTres[displayedControls[z]] + "\"/></div></div>"
                 }
 
               }
               //Sees if control has an invert switch and deals with it accordingly
-              if (displayedControls[z] in invertTogglesTres && !(displayedControls[z] in deadzoneSliderTres)){
+              else if (displayedControls[z] in invertTogglesTres && !(displayedControls[z] in deadzoneSliderTres)){
                 if (invertTogglesTres[displayedControls[z]] == 1){
                   concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "> <label for=\"" + displayedControls[z] + "\">Invert</label></div></div>"
-                  console.log(displayedControls[z])
                   //document.getElementById(displayedControls[z]).checked = true;
                 }
                 else{
                   concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "> <label for=\"" + displayedControls[z] + "\"></label>Invert</div> </div>"
                 }
               }
-              if (displayedControls[z] in deadzoneSliderTres && !(displayedControls[z] in invertTogglesTres)){
+              else if (displayedControls[z] in deadzoneSliderTres && !(displayedControls[z] in invertTogglesTres)){
                 concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"range\" id=" + displayedControls[z] + " min=\"0\" max=\"1\" step=\".001\" value=" + deadzoneSliderTres[z] + "><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div></div>"
-                console.log(deadzoneSliderTres[displayedControls[z]])
+              }
+              else if (displayedControls[z] in baseControls){
+                //long ass way to deal with misc. controls with non-standard options
+                if (displayedControls[z] == "YawToRollMode"){
+                  switch(baseControls[displayedControls[z]]){
+                    case "Bindings_YawIntoRollNone":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone' selected>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime'>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll'>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    case "Bindings_YawIntoRollTime":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone'>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime' selected>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll'>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    case "Bindings_YawIntoRollLowRoll":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone'>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime'>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll' selected>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    default:
+                      console.log("something fucky this way comes")
+                  }
+                }
+                else if (displayedControls[z] == "YawToRollMode_FAOff"){
+                  switch (baseControls[displayedControls[z]]) {
+                    case "":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='normal' selected>Normal Behavior</option><option value='Bindings_YawIntoRollNone'>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime'>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll'>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    case "Bindings_YawIntoRollNone":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone' selected>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime'>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll'>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    case "Bindings_YawIntoRollTime":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone'>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime' selected>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll'>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    case "Bindings_YawIntoRollLowRoll":
+                      concat += "<div class='controls'>" + displayedControls[z] + "<select id='" + displayedControls[z] + "Dropdown'><option value='Bindings_YawIntoRollNone'>Bindings_YawIntoRollNone</option><option value='Bindings_YawIntoRollTime'>Bindings_YawIntoRollTime</option><option value='Bindings_YawIntoRollLowRoll' selected>Bindings_YawIntoRollLowRoll</option></select></div>"
+                    break;
+                    default:
+
+                  }
+                }
+                else if (baseToggles.includes(displayedControls[z])){
+                  concat += "<div class='controls'>" + displayedControls[z] + "<div>" + "<input id=\"" + displayedControls[z] + "Check\"type=\"checkbox\" /> </div>" + "</div>"
+                }
+                else{
+                  if (isNaN(parseFloat(baseControls[displayedControls[z]]))){
+                    concat += "<div class='controls'>" + displayedControls[z] + "<div>" + baseControls[displayedControls[z]] + "</div>" + "</div>"
+                  }
+                  else{
+                    concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" value=" + baseControls[displayedControls[z]] + "><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\" value=\"" + baseControls[displayedControls[z]] + "\" /></div></div>"
+                    baseIsSlider.push(displayedControls[z])
+                  }
+                }
               }
               else{
-                //console.log(displayedControls, z);
                 concat += "<div class='controls'>" + displayedControls[z] + "</div>";
-                //console.log(concat);
               }
             }
           }
         }
-      console.log(displayedControls)
+      //actual call that displays all of the control divs after fxn loop adds them to an object
       document.getElementById("controlsContainer").innerHTML = concat;
+
+      //two .map() fxns just run the makeListener for all appropriate controls
       var keys = Object.keys(deadzoneSliderTres)
     //  keys.map(makeListener(displayedControls))
       .map((keys) => makeListener(keys, displayedControls))
+      var baseKeys = baseIsSlider
+//do not delete this comment, shit will break, idk, ive spent to much time already
+      .map((baseKeys) => makeListener(baseKeys, displayedControls))
 
+        //checks to see if the invert is toggled on the controls file and shows accordingly
         for (l in invertTogglesTres){
           if (l in displayedControls){
             if (invertTogglesTres[l] == 1){
-              console.log(l)
               document.getElementById(l).checked = true;
+            }
+          }
+        }
+        //sets default state of the slider when loaded
+        for (m in deadzoneSliderTres){
+          if (displayedControls.includes(m)){
+            document.getElementById(m).value = deadzoneSliderTres[m];
+          }
+        }
+        for (m in baseIsSlider){
+          var a = m + "Text"
+          if (displayedControls.includes(m)){
+            document.getElementById(m).value = baseIsSlider[m];
+            document.getElementById(a).value = baseIsSlider[m];
+          }
+        }
+        for (l in baseToggles){
+          for (l in displayedControls){
+            if (baseToggles[l] == 1){
+              var box = l + "Check"
+              document.getElementById(box).checked = true;
             }
           }
         }
       }
 
       document.getElementById("preset").addEventListener("change", function(){fuck(bigBoi)})
-      //Makes Sliders match Text boxes for deadzoneSlider
 
 }
 

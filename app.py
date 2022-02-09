@@ -19,6 +19,8 @@ def keymapFileParse():
     keyBinds = {}
     invertToggles = {}
     deadzoneSlider = {}
+    axisBindings = {}
+    baseControls = {}
     if request.method == 'POST':
         preset = request.form.get('preset')
         f = request.files['keymapFile']
@@ -36,17 +38,21 @@ def keymapFileParse():
                         if gchild.attrib['Device'] == "Keyboard":
                             keyBinds[child.tag] = gchild.attrib['Key']
 
+                if gchild.tag == 'Binding':
+                    if gchild.attrib['Device'] == "Mouse":
+                        axisBindings[child.tag] = gchild.attrib['Key']
                 if gchild.tag == 'Inverted':
                     invertToggles[child.tag] = gchild.attrib['Value']
                 if gchild.tag == 'Deadzone':
                     deadzoneSlider[child.tag] = gchild.attrib['Value']
                 else:
                     pass
-
+            if 'Value' in child.attrib:
+                baseControls[child.tag] = child.attrib['Value']
 
         bindsJSON = json.dumps(keyBinds)
         invertTogglesPartTwo = json.dumps(invertToggles)
         deadzoneSlider = json.dumps(deadzoneSlider)
-        return render_template("binds.html", invertTogglesPartTwo = invertTogglesPartTwo, bindsJSON = bindsJSON, deadzoneSlider = deadzoneSlider)
+        return render_template("binds.html", invertTogglesPartTwo = invertTogglesPartTwo, bindsJSON = bindsJSON, deadzoneSlider = deadzoneSlider, axisBindings = axisBindings, baseControls = baseControls)
     else:
         return render_template("binds.html")

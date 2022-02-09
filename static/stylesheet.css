@@ -10,6 +10,9 @@ html, body{
 	margin: 0vh;
 	z-index: 1;
 }
+select{
+	background-color:black;
+}
 #cursorFollow{
 	height:100px;
 	width:100px;
@@ -45,6 +48,47 @@ html, body{
 	background-color: #000000;
 	height: 95vh;
 	width: 80vw;
+	text-align: center;
+}
+#getStarted{
+	font-size: 3em;
+}
+#buttonSmoosher{
+	margin-top: 15%;
+}
+#fileSelectButton{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#fileSelectButton + label{
+	color: #FF8C0D;
+	font-size: 3em;
+	padding: 1% 5%;
+	border: 2px solid #FF8C0D;
+	border-radius: 5px;
+	background-color: #321A00;
+}
+#fileSelectButton + label:hover{
+	background-color: #FF8C0D;
+	color: #321A00;
+}
+#uploadButton{
+	/* width: 20%; */
+	padding: 1% 5%;
+	background-color: #321A00;
+	border-color: #FF8C0D;
+	color: #FF8C0D;
+	font-size: 3em;
+	border-radius: 5px;
+	margin-top: 5%;
+}
+#uploadButton:hover{
+	background-color: #FF8C0D;
+	color: #321A00;
 }
 .grid_container{
 	display: grid;
@@ -54,11 +98,11 @@ html, body{
 		margin: 0vh;
 }
 .title{
-	color: #FF3B00;
+	color: #FF8C0D;
 	line-height: 0em;
 	margin-left: 10px;
 	font-family: eurostyle;
-	text-align: center;
+	text-align: left;
 }
 .kbswitch{
 	background-color: #321A00;
