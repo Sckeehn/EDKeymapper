@@ -19,7 +19,6 @@
       <div id = "left_bar">
           <form>
             <select id="preset">
-              <option value="all">All</option>
               <option value="flightRotation">Flight Rotation</option>
               <option value="flightThrust">Flight Thrust</option>
               <option value="flightThrottle">Flight Throttle</option>
@@ -201,8 +200,10 @@
         //Makes the invisible div follow the cursor
       var cursorFollow = document.getElementById("cursorFollow");
         const onMouseMove = (e) =>{
+          document.getElementById("cursorFollow").style.display = 'none';
+          document.getElementById("cursorFollow").innerHTML = "";
           cursorFollow.style.left = e.pageX-50 + 'px';
-          cursorFollow.style.top = e.pageY+10 + 'px';
+          cursorFollow.style.top = e.pageY-50 + 'px';
           if (document.elementFromPoint(e.pageX, e.pageY) == null){
             //pass
           }
@@ -215,6 +216,9 @@
               var whatHoverId = whatHover.id
               var controlBound = document.getElementById(whatHoverId).getAttribute("control")
               document.getElementById("cursorFollow").innerHTML = controlBound;
+              if (document.getElementById("cursorFollow").innerHTML != "") {
+                document.getElementById("cursorFollow").style.display = 'inline';
+              }
             }
           }
         }
@@ -311,6 +315,7 @@
                     document.getElementById(stripped.toLowerCase()).setAttribute("control", displayedControls[z]);
                 }
               }
+              //grabs if it has both an invert toggle AND a deadzone slider
               else if (displayedControls[z] in invertTogglesTres && displayedControls[z] in deadzoneSliderTres){
                 if (invertTogglesTres[displayedControls[z]] == 1){
                   concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"checkbox\" id=" + displayedControls[z] + "chckBx\"> <label for=\"" + displayedControls[z] + "\">Invert</label><input type=\"range\" id=\"" + displayedControls[z] + "\" min=\"0\" max=\"1\" step=\".001\" /><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\" value=\"" + deadzoneSliderTres[displayedControls[z]] + "\"/></div></div>"
@@ -331,6 +336,7 @@
                 }
               }
               else if (displayedControls[z] in deadzoneSliderTres && !(displayedControls[z] in invertTogglesTres)){
+                // Grabs Controls with deadzone sliders
                 concat += "<div class='controls'>" + displayedControls[z] + "<div> <input type=\"range\" id=" + displayedControls[z] + " min=\"0\" max=\"1\" step=\".001\" value=" + deadzoneSliderTres[z] + "><input tpye=\"number\" class=\"deadZoneSliderTextBox\" id=\"" + displayedControls[z] + "Text\"/></div></div>"
               }
               else if (displayedControls[z] in baseControls){
@@ -382,7 +388,9 @@
                 }
               }
               else{
-                concat += "<div class='controls'>" + displayedControls[z] + "</div>";
+                concat += "<div class='controls'>" + displayedControls[z] + "<div> Unbound </div>" + "</div>";
+              // I have no fucking clue what this line underneath does, idk why i even added it. FUCK
+              //   document.getElementById(displayedControls[z]).setAttribute("control", "")
               }
             }
           }

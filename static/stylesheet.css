@@ -14,17 +14,18 @@ select{
 	background-color:black;
 }
 #cursorFollow{
-	height:100px;
-	width:100px;
+	height:2em;
 	z-index: 100;
-	background-color: blueviolet;
+	background-color: black;
 	position: absolute;
 	display: none;
 	pointer-events: none;
+	border: 2px solid #FF8C0D;
+	border-radius: 3px;
 }
-.kbswitch:hover ~ #cursorFollow{
+/* .kbswitch ~ #cursorFollow{
 	display:inline;
-}
+} */
 .navbar{
 	grid-area: navbar;
 	background-color: #1e1e1e;
